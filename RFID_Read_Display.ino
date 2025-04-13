@@ -154,10 +154,18 @@ void loop()
     lcd.write(readBlockData[j]);
      /* lcd.write(readBlockData[j]); */
   }
-   /*
- delay(5000);  // Delay for 5000 miliseconds 
-  lcd.clear();  // Clear the screen after the delay
- */
+  
+   // Libération de la carte pour permettre une nouvelle lecture
+  mfrc522.PICC_HaltA();
+  mfrc522.PCD_StopCrypto1();
+
+  // Attente avant de pouvoir rescanner une nouvelle carte
+  delay(2000);
+  lcd.clear();
+  lcd.setCursor(1,0);
+  lcd.print("Ready !");
+  lcd.setCursor(0,1);
+  lcd.print("Scan your Card :)");  
  
 }
 
